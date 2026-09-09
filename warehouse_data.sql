@@ -37,3 +37,24 @@ select ship_day,warehouse_id,sku,total_units,warehouse_percentage from ranked_wa
 where rn=1
 order by warehouse_id,ship_day;
 
+
+--table called deliveries with columns: delivery_id, partner_id, delivery_date, status (Success/Failed/Delayed),
+--region. Write me a query to find — for each region — the delivery partner with the highest failure rate in the last 30 days, but only include partners who had at least 50 deliveries.
+with delivery_partner as(
+select region,partner_id,count(*) as total_deliveres,
+sum(case when status = 'failed' then 1 else 0 end) as failed_delivery
+sum(case when status = 'failed' then 1 else 0 end)*1.0/count(*) as failed_rate
+from deliveries
+where delivery_date >= current_date-interval "30 days"
+having count(*)>=50
+),
+ranked as(
+select region,partner_id,total_deliveres,failed_delivery,failed_rate,
+row_number() over(partition by region order by failed_rate desc) as rn
+from delivery_partner
+)
+select region,partner_id,total_deliveries,failed_delivery,failed_rate
+from ranked
+where rn=1;
+
+
