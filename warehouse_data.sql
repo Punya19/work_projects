@@ -58,26 +58,26 @@ from ranked
 where rn=1;
 
 
-  Sales table has folowing columns.  
+  -- Sales table has folowing columns.  
 
-  date      sale_1    sale_2    sale_3 
-  1st-jan   100        200      300
-  2nd-jan   50         100      40
-  3rd-jan   300        200      100 
+  -- date      sale_1    sale_2    sale_3 
+  -- 1st-jan   100        200      300
+  -- 2nd-jan   50         100      40
+  -- 3rd-jan   300        200      100 
+  -- 
+  -- write a query to provide the maximum sales for each day out of sale_1, sale_2, sale_3. 
   
-  write a query to provide the maximum sales for each day out of sale_1, sale_2, sale_3. 
-  
-  date     maximum_sale
+  -- date     maximum_sale
   
   select date, greatest(sale_1,sale_2,sale_3) as maximum_sale
   from sales
   
   
   
-  login, activity , time_stamp 
+--   login, activity , time_stamp 
 
-farzama , punch_in,     2026-04-05 08:15 
-farzama , punch_out,     2026-04-05 15:15 
+-- farzama , punch_in,     2026-04-05 08:15 
+-- farzama , punch_out,     2026-04-05 15:15 
 
 find the employees who are available in office still. 
 select login,activity,time_stamp(
